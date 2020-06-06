@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -eu
+
+if ! grep 'Host dockie-box' "$HOME/.ssh/config" >/dev/null; then
+	printf 'ip? ' && read -r ip
+	{
+		echo
+		echo "Host dockie-box"
+		echo "  Hostname $ip"
+		echo "  User dockie"
+	} >> "$HOME/.ssh/config"
+fi
+
+if [ ! -f "$HOME/.ssh/id_rsa" ]; then
+	yes "" | ssh-keygen
+fi
+
+ssh-copy-id dockie-box

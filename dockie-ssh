@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -eu
+
+ssh -o LogLevel=QUIET -t dockie-box /usr/local/bin/dockie "$@"
